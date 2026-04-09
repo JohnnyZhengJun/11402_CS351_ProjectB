@@ -7,6 +7,7 @@ This project implements a CSV database and query engine, providing a robust solu
 ## Features
 
 ### CSV Parser
+
 - **Custom Parser**: A hand-built CSV parser that handles edge cases such as:
     - Quoted fields with embedded delimiters
     - Multi-line values within quotes
@@ -15,15 +16,18 @@ This project implements a CSV database and query engine, providing a robust solu
 - **Data Integrity**: Validates data types, handles missing values gracefully, and provides error reporting for malformed rows
 
 ### Library Integration
+
 - **vcpkg/Conan Support**: Optionally integrate lightweight parsing libraries (e.g., CSV parser libraries) via vcpkg or Conan for enhanced performance and reduced maintenance burden
 - **Comparison**: Benchmark custom implementation against library solutions
 
 ### Index System
+
 - **Primary Index**: Fast lookup by key columns
 - **Secondary Indexes**: Support for additional columns to optimize common query patterns
 - **B-Tree/Hash Indexes**: Efficient data structures for range and equality queries
 
 ### Query Grammar
+
 - **SQL-like Syntax**: Support for basic query operations:
     - `SELECT` columns
     - `WHERE` conditions (equality, comparison operators)
