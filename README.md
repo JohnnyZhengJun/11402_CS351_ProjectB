@@ -2,38 +2,37 @@
 
 ## Project Overview
 
-This project implements a CSV database and query engine, providing a robust solution for parsing, indexing, and querying CSV data efficiently.
+This repository implements a CSV database and query engine with a focus on the query execution code in `QE.cpp`. The system supports loading CSV data, building indexes, parsing SQL-like queries, and executing filters, projections, sorting, and limits.
 
 ## Features
 
 ### CSV Parser
-- **Custom Parser**: A hand-built CSV parser that handles edge cases such as:
-    - Quoted fields with embedded delimiters
-    - Multi-line values within quotes
-    - Escaped characters
-    - Empty fields and trailing newlines
-- **Data Integrity**: Validates data types, handles missing values gracefully, and provides error reporting for malformed rows
 
-### Library Integration
-- **vcpkg/Conan Support**: Optionally integrate lightweight parsing libraries (e.g., CSV parser libraries) via vcpkg or Conan for enhanced performance and reduced maintenance burden
-- **Comparison**: Benchmark custom implementation against library solutions
+- **Custom Parser**: Handles CSV edge cases such as:
+  - Quoted fields with embedded delimiters
+  - Multi-line values within quotes
+  - Escaped characters
+  - Empty fields and trailing newlines
+- **Data Integrity**: Validates types, handles missing values, and reports malformed rows
+
+### Query Execution Engine
+
+- **SQL-like Syntax**: Supports basic query statements:
+  - `SELECT` columns
+  - `WHERE` conditions (equality, comparison operators)
+  - `ORDER BY` sorting
+  - `LIMIT` results
+- **QE.cpp Implementation**: Implements query planning, predicate evaluation, row projection, and result generation
 
 ### Index System
-- **Primary Index**: Fast lookup by key columns
-- **Secondary Indexes**: Support for additional columns to optimize common query patterns
-- **B-Tree/Hash Indexes**: Efficient data structures for range and equality queries
 
-### Query Grammar
-- **SQL-like Syntax**: Support for basic query operations:
-    - `SELECT` columns
-    - `WHERE` conditions (equality, comparison operators)
-    - `ORDER BY` sorting
-    - `LIMIT` results
-- **Parser**: Custom lexer and parser to interpret query commands
+- **Primary Index**: Fast lookup by key columns
+- **Secondary Indexes**: Optimize common query patterns on other columns
+- **B-Tree/Hash Indexes**: Designed for efficient range and equality queries
 
 ## Architecture
 
-```
+```text
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
 │   Query     │────▶│   Query     │────▶│   Result    │
 │   Input     │     │   Engine    │     │   Output    │
@@ -50,26 +49,14 @@ This project implements a CSV database and query engine, providing a robust solu
 ## Building the Project
 
 ```bash
-# Using CMake
-mkdir build && cd build
-cmake ..
-make
-
-# Using vcpkg (optional)
-vcpkg install csv-parser
+g++ QE.cpp -o QE
 ```
 
 ## Usage
 
 ```bash
 # Load a CSV file
-./csvdb --load data.csv
-
-# Execute a query
-./csvdb --query "SELECT * FROM data WHERE age > 25"
-
-# Create an index
-./csvdb --index data.csv --column name
+./QE --csv PATH_file
 ```
 
 ## Performance Comparison
@@ -85,7 +72,7 @@ vcpkg install csv-parser
 Run unit tests to verify parser correctness and query engine functionality:
 
 ```bash
-./test_runner
+mini-db> SELECT * FROM table_name
 ```
 
 ## Deliverables
