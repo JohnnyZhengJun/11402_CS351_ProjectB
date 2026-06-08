@@ -15,7 +15,7 @@ struct Table {
     vector<vector<string>> rows;
 };
 
-// --- Pure Functions & Core Logic ---
+// --- Functions & Core Logic ---
 void printHelp() {
     cout << "Usage: mini-database --csv <filename.csv>\n"
         << "Options:\n"
